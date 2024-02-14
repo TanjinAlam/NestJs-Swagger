@@ -19,7 +19,7 @@ export class CreateMagazineDTO {
 
     @IsString()
     @ApiProperty()
-    readonly publicationDate: string
+    readonly publisherName: string
 
     @ApiProperty({ type: 'string', format: 'binary', required: true })
     file: Express.Multer.File

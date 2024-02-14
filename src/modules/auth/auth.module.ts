@@ -6,16 +6,16 @@ import { UserModule } from '../user/user.module'
 import { AuthController } from './auth.controller'
 import { AuthService } from './service/auth.service'
 import { JwtStrategy } from './strategy/jwt.strategy'
-
+import { jwtConfig } from 'src/config/jwt.config'
 @Module({
     imports: [
-        // JwtModule.registerAsync(jwtAsyncConfig),
+        JwtModule.registerAsync(jwtConfig),
         TypeOrmModule.forFeature([User]),
-        JwtModule.register({
-            global: true,
-            secret: 'asdf',
-            signOptions: { expiresIn: '60s' }
-        }),
+        // JwtModule.register({
+        //     global: true,
+        //     secret: 'asdf',
+        //     signOptions: { expiresIn: '60s' }
+        // }),
         UserModule
     ],
     controllers: [AuthController],

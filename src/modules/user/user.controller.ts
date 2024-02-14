@@ -1,5 +1,5 @@
 import { Controller, Get, HttpStatus } from '@nestjs/common'
-import { ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger'
 import { UserService } from 'src/modules/user/user.service'
 
 @Controller('/users')
@@ -8,7 +8,7 @@ export class UserController {
 
     @Get('/subscriptions')
     @ApiOperation({
-        summary: 'View all subscription of user'
+        summary: 'View all subscription endpoint'
     })
     @ApiResponse({
         description: 'Something went wrong',
@@ -22,7 +22,25 @@ export class UserController {
         return {
             statusCode: HttpStatus.OK,
             message: 'User found'
-            // result: await this.userService.findOne(userUuid)
+            result: await this.userService.find(userUuid)
         }
+    }
+
+
+    @Get()
+    @ApiBearerAuth()
+    @ApiOperation({
+        summary: 'Get all endpoint'
+    })
+    @ApiResponse({
+        description: 'Something went wrong',
+        status: HttpStatus.BAD_REQUEST
+    })
+    @ApiResponse({
+        description: 'Magazine found successful',
+        status: HttpStatus.CREATED
+    })
+    findAll() {
+        return this.userService.findAll()
     }
 }

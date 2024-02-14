@@ -118,8 +118,8 @@ export class AuthService {
         })
     }
 
-    private async sign(user: any) {
-        const accessToken = await this.jwtService.signAsync({
+    private sign(user: any) {
+        const accessToken = this.jwtService.sign({
             sub: user.uuid
         })
         console.log('accessToken', accessToken)

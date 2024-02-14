@@ -15,7 +15,6 @@ export class RoleGuard implements CanActivate {
         )
         if (!roles) return true
         const request = context.switchToHttp().getRequest()
-        console.log('request', request)
         const userRole = request.user?.userType
         return roles.indexOf(userRole) > -1
     }

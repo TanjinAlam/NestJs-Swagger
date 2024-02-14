@@ -3,6 +3,7 @@ import { Exclude } from 'class-transformer'
 import { IsEmail, IsString } from 'class-validator'
 import { DefaultBaseEntity } from 'src/common/entities'
 import { UserType } from 'src/common/enums'
+import { Magazine } from 'src/modules/magazine/entities/magazine.entity'
 
 import {
     BeforeInsert,
@@ -10,6 +11,7 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     UpdateDateColumn
 } from 'typeorm'
 @Entity()
@@ -38,6 +40,9 @@ export class User extends DefaultBaseEntity {
     @Column({ type: 'varchar', length: 255, nullable: false })
     @IsString()
     password: string
+
+    @OneToMany(() => Magazine, (magazine) => magazine.user)
+    magazine: Magazine[]
 
     @CreateDateColumn()
     createdAt: Date
